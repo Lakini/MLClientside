@@ -198,12 +198,14 @@
 	<script type="text/javascript">
 	
 $(document).ready(function(e){
+		var serverUrl = window.location.origin;
 		$select = $('#analysis_set');
 		
 	      	$.ajax({
-	           url:'/api/analyses',
+	           url:serverUrl+'/api/analyses',
 	           dataType: 'json',
 	           timeout: 1000,
+	           async:false,
 	           headers: {
 	           	"Authorization": "Basic YWRtaW46YWRtaW4="},
 	           success: function (data, status, jqXhr) {
@@ -220,9 +222,10 @@ $(document).ready(function(e){
 			$selectdata = $('#data_set');
 
 			 $.ajax({
-			     url:'/api/datasets',
+			     url:serverUrl+'/api/datasets',
 			     dataType: 'json',
 			     timeout: 1000,
+			     async:false,
 			     headers: {
 			     	"Authorization": "Basic YWRtaW46YWRtaW4="
 			     },
@@ -244,9 +247,10 @@ $(document).ready(function(e){
 						$selectdataversion = $('#dataset_version');
 
 						 $.ajax({
-						     url:'/api/datasets/'+dataset+'/versions',
+						     url:serverUrl+'/api/datasets/'+dataset+'/versions',
 						     dataType: 'json',
 						     timeout: 1000,
+						     async:false,
 						     headers: {
 						     	"Authorization": "Basic YWRtaW46YWRtaW4="
 						     },
