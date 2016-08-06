@@ -3,6 +3,9 @@ $(document).ready(function(e){
     draggableInputNo=0;
     draggableHiddenNo=0;
     draggableOutputNo=0;
+    curentInputlayerID="";
+    curentHiddenlayerID="";
+    curentOutputlayerID="";
     nodeNo=0;
 
    $(function() {
@@ -19,20 +22,20 @@ $(document).ready(function(e){
              draggableInputNo++;
              $element.attr("id",'draggableInput'+draggableInputNo);
              $element.appendTo(this);
-             inputDetails($element);
-
+             settingsInput($element);
            }
            else if(ui.draggable.attr('id')=='draggableHidden'){
              draggableHiddenNo++;
              $element.attr("id",'draggableHidden'+draggableHiddenNo);
              $element.appendTo(this);
-             settingHidden($element);   
+             settingHidden($element);
            }
 
            else if(ui.draggable.attr('id')=='draggableOutput'){
              draggableOutputNo++;
              $element.attr("id",'draggableOutput'+draggableOutputNo);
              $element.appendTo(this);
+             settingoutput($element);
            }   
 
            else if(ui.draggable.attr('id')=='nodes'){
@@ -223,7 +226,6 @@ $(document).ready(function(e){
               */ 
            $element.draggable();
            $element.selectable();
-
          }
 
        });
@@ -252,10 +254,7 @@ $(document).ready(function(e){
       	$( ".draggableOutput" ).draggable({
       		containment: '#droppable',
       		cursor: 'move',
-      		helper: draggableOutputHelper,
-         stop: function( event, ui ) {
-           dialogOut.dialog( "open" );
-         }
+      		helper: draggableOutputHelper
       	});	 
 
        /*
@@ -282,176 +281,29 @@ $(document).ready(function(e){
            });
        });
 
-       /*
-        * Display dialog box for Hidden layers
-        */
-     function settingHidden(ui) {
-           $x=ui.attr('id');
-           dialogHidden.attr('id',"dialogHidden"+$x);
+        function settingsInput(ui){
+            $x=ui.attr('id');
+            curentInputlayerID=$x;
+            $("#draggableInput1").dblclick(function(){
+                $("#inputsettingModel").modal('show');
+            });
+        }
 
-           if(dialogHidden.attr('id')=="dialogHiddendraggableHidden1"){
-             dialogHidden.dialog( "open" );
-           }
+        function settingHidden(ui){
+            $x=ui.attr('id');
+            curentHiddenlayerID=$x;
+            $("#"+$x).dblclick(function(){
+                $("#hiddensettingModel").modal('show');
+            });
+        }
 
-           else if(dialogHidden.attr('id')=="dialogHiddendraggableHidden2"){
-             dialogHidden.dialog( "open" );
-           }
-
-          else if(dialogHidden.attr('id')=="dialogHiddendraggableHidden3"){
-             dialogHidden.dialog( "open" );
-           }
-
-           else if(dialogHidden.attr('id')=="dialogHiddendraggableHidden4"){
-             dialogHidden.dialog( "open" );
-           }
-
-           else if(dialogHidden.attr('id')=="dialogHiddendraggableHidden5"){
-             dialogHidden.dialog( "open" );
-           }
-
-           else if(dialogHidden.attr('id')=="dialogHiddendraggableHidden6"){
-             dialogHidden.dialog( "open" );
-           }
-
-           else if(dialogHidden.attr('id')=="dialogHiddendraggableHidden7"){
-             dialogHidden.dialog( "open" );
-           }
-
-           else if(dialogHidden.attr('id')=="dialogHiddendraggableHidden8"){
-             dialogHidden.dialog( "open" );
-           }
-
-           else if(dialogHidden.attr('id')=="dialogHiddendraggableHidden9"){
-             dialogHidden.dialog( "open" );
-           }
-
-           else if(dialogHidden.attr('id')=="dialogHiddendraggableHidden10"){
-             dialogHidden.dialog( "open" );
-           }
-
-       }
-
-       /*
-        * Dialog box save function for hidden layers
-        */ 
-       function saveHidden() {
-          if(dialogHidden.attr('id')=="dialogHiddendraggableHidden1"){
-             dialogHidden.dialog( "close" );
-           }
-           else if(dialogHidden.attr('id')=="dialogHiddendraggableHidden2"){
-             dialogHidden.dialog( "close" );
-           }
-          else if(dialogHidden.attr('id')=="dialogHiddendraggableHidden3"){
-             dialogHidden.dialog( "close" );
-           }
-           else if(dialogHidden.attr('id')=="dialogHiddendraggableHidden4"){
-             dialogHidden.dialog( "close" );
-           }
-           else if(dialogHidden.attr('id')=="dialogHiddendraggableHidden5"){
-             dialogHidden.dialog( "close" );
-           }
-           else if(dialogHidden.attr('id')=="dialogHiddendraggableHidden6"){
-             dialogHidden.dialog( "close" );
-           }
-           else if(dialogHidden.attr('id')=="dialogHiddendraggableHidden7"){
-             dialogHidden.dialog( "close" );
-           }
-           else if(dialogHidden.attr('id')=="dialogHiddendraggableHidden8"){
-             dialogHidden.dialog( "close" );
-           }
-           else if(dialogHidden.attr('id')=="dialogHiddendraggableHidden9"){
-             dialogHidden.dialog( "close" );
-           }
-           else if(dialogHidden.attr('id')=="dialogHiddendraggableHidden10"){
-             dialogHidden.dialog( "close" );
-           }
-       }
-
-       /*
-        * Dialog box open function for Input layer
-        */ 
-       function inputDetails(ui){
-           $x=ui.attr('id');
-
-           $("#draggableInput1").dblclick(function(){
-             dialogInput.attr('id',"dialogInput"+$x);
-
-           if(dialogInput.attr('id')=="dialogInputdraggableInput1"){
-             dialogInput.dialog( "open" );
-           }
-
-           });
-       }
-
-       /*
-        * Set dialog box for the Hidde Layer
-        */ 
-       dialogHidden = $( ".dialog-form-hidden" ).dialog({
-         autoOpen: false,
-         height: 350,
-         width: 350,
-         modal: true,
-         buttons: {
-           "Save": saveHidden,
-           Cancel: function() {
-             dialogHidden.dialog( "close" );
-           }
-         }
-       });
-
-       /*
-        * Dialog Box save function for Outer layer
-        */ 
-       function save() {
-          dialogOut.dialog( "close" );
-       }
-
-       /*
-        * Dialog Box save function for Input layer
-        */
-       function saveInput() {
-          dialogInput.dialog( "close" );
-       }
-
-       /*
-        * Set dialog box for the Output Layer
-        */ 
-       dialogOut = $( ".dialog-form-output" ).dialog({
-         autoOpen: false,
-         height: 400,
-         width: 350,
-         modal: true,
-         buttons: {
-           "Save": save,
-           Cancel: function() {
-             dialogOut.dialog( "close" );
-           }
-         },
-         close: function() {
-           form[ 0 ].reset();
-           allFields.removeClass( "ui-state-error" );
-         }
-       });
-
-       /*
-        * Set dialog box for the Input Layer
-        */ 
-       dialogInput = $( ".dialog-form-input" ).dialog({
-         autoOpen: false,
-         height: 200,
-         width: 300,
-         modal: true,
-         buttons: {
-           "Save": saveInput,
-           Cancel: function() {
-             dialogInput.dialog( "close" );
-           }
-         },
-         close: function() {
-           form[ 0 ].reset();
-           allFields.removeClass( "ui-state-error" );
-         }
-       });
+        function settingoutput(ui){
+            $x=ui.attr('id');
+            curentOutputlayerID=$x;
+            $("#draggableOutput1").dblclick(function(){
+                $("#outputsettingModel").modal('show');
+            });
+        }
 
     });
 
@@ -475,40 +327,7 @@ $(document).ready(function(e){
    function draggableOutputHelper(event){
    	return '<div id="draggableOutput'+draggableOutputNo+'" class="draggableOutputHelper" ></div>'
    }
-   
-   //on change the dataset
-//   $(function() {
-//	   $("#data_set").on("change",function() {
-//	     var dataset = this.value;
-//	     
-//			$selectdataversion = $('#dataset_version');
-//
-//			 $.ajax({
-//			     url:'/api/datasets/'+dataset+'/versions',
-//			     dataType: 'json',
-//			     timeout: 1000,
-//			     headers: {
-//			     	"Authorization": "Basic YWRtaW46YWRtaW4="
-//			     },
-//			     success: function (data, status, jqXhr) {
-//			  	   $.each(data,function(i,data1){        	   
-//			  		   $selectdataversion.append('<option value="'+data1.id+'">'+data1.name+'</option>');
-//			  			});
-//			  			console.log(jqXhr.responseText);
-//			         },
-//			     error:function (jqXhr, textStatus, errorMessage) {
-//			 	   console.log('Error: ' + errorMessage);
-//			     }
-//			       });
-//			
-//			 document.getElementById("version").style.visibility = "visible";
-//			 
-//	     
-//	   }); 
-//	 });
-   
-   
-   
+
 });
 
 

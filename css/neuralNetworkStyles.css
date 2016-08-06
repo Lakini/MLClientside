@@ -196,6 +196,7 @@ fieldset {
 /* css stylings for dialog form for input layer */
 #dialog-form-input {
 	float: left;
+	
 }
 
 /* css stylings for labels in dialog forms */
@@ -204,6 +205,7 @@ fieldset {
 	width: 50%;
 	height: 46px;
 	padding: 8px 8px;
+	
 }
 
 /* css stylings for dropdowns in dialog forms */
@@ -211,6 +213,7 @@ fieldset {
 	float: left;
 	width: 50%;
 	padding: 8px 8px;
+	
 }
 
 /* css stylings for labels in the common NN seetings div */
